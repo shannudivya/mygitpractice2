@@ -1,0 +1,22 @@
+import subprocess
+option=input("do you wish to delete images or containers: i/c: ")
+if option == 'i':
+    images_option = input("Do you wish to delete all images or delete a single images: a/s: ")
+    if images_option == 'a':
+        subprocess.call("docker system prune -af",shell = True)
+    elif images_option == 's':
+        image = input("enter the image to be deleted : ")
+        subprocess.call ("docker rmi %s"%image,shell = True)
+    else:
+        print("Invalid image delete option selected")
+elif option == 'c':
+        container_option = input("Do you wish to delete all containers or a single container : a/s: ")
+        if container_option == 'a':
+            subprocess.call("docker rm -f $(docker ps -aq)", shell = True)
+        elif container_option == 's':
+            container = input("enter the name of the containerr that is to be deleted : ")
+            subprocess.call("dockeer rm -f %s"%container, shell =True)
+        else:
+            print("Invalid container delete option selected")
+else:
+     print("invalid")
